@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikasi Aritmatika</title>
+    <style>
+        /* CSS untuk tampilan responsif (tanpa framework CSS) */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aplikasi Aritmatika</h1>
+
+        <h2>Deret Fibonacci</h2>
+        <label>Masukkan jumlah elemen deret:</label>
+        <input type="text" id="fibonacciInput">
+        <button onclick="calculateFibonacci()">Hitung Fibonacci</button>
+        <p id="fibonacciResult"></p>
+
+        <h2>Volume Bangun Ruang</h2>
+        <label>Pilih jenis bangun ruang:</label>
+        <select id="shapeType">
+            <option value="cube">Kubus</option>
+            <option value="sphere">Bola</option>
+            <option value="cylinder">Silinder</option>
+        </select>
+        <label>Masukkan nilai yang diperlukan:</label>
+        <input type="text" id="shapeValue">
+        <button onclick="calculateVolume()">Hitung Volume</button>
+        <p id="volumeResult"></p>
+    </div>
+
+    <script>
+        function calculateFibonacci() {
+            const input = document.getElementById("fibonacciInput").value;
+            const n = parseInt(input);
+
+            if (!isNaN(n)) {
+                let fibonacci = [0, 1];
+                for (let i = 2; i < n; i++) {
+                    fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+                }
+                document.getElementById("fibonacciResult").innerText = "Hasil Fibonacci: " + fibonacci.join(", ");
+            } else {
+                document.getElementById("fibonacciResult").innerText = "Masukkan jumlah elemen deret yang valid.";
+            }
+        }
+
+        function calculateVolume() {
+            const shapeType = document.getElementById("shapeType").value;
+            const shapeValue = parseFloat(document.getElementById("shapeValue").value);
+
+            if (!isNaN(shapeValue)) {
+                let result = 0;
+
+                switch (shapeType) {
+                    case "cube":
+                        result = Math.pow(shapeValue, 3);
+                        break;
+                    case "sphere":
+                        result = (4/3) * Math.PI * Math.pow(shapeValue, 3);
+                        break;
+                    case "cylinder":
+                        result = Math.PI * Math.pow(shapeValue, 2) * shapeValue;
+                        break;
+                }
+
+                document.getElementById("volumeResult").innerText = "Volume: " + result.toFixed(2);
+            } else {
+                document.getElementById("volumeResult").innerText = "Masukkan nilai yang valid.";
+            }
+        }
+    </script>
+</body>
+</html>
